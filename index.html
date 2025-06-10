@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hata Kodu</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"
+        integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/index.css">
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="login-container">
+            <div class="login-card" data-aos="zoom-in" data-aos-duration="1000" data-aos-easing="ease-out-cubic">
+                <img src="assets/img/hata_kodu_logo.png" alt="hata_kodu_logo" class="brand-logo" data-aos="fade-down"
+                    data-aos-delay="200">
+                <!-- <h1 class="brand-title" data-aos="fade-up" data-aos-delay="400">HATAKODU</h1> -->
+
+                <form>
+                    <div class="form-floating" data-aos="fade-right" data-aos-delay="600">
+                        <input type="text" class="form-control" id="username" name="username"
+                            placeholder="Kullanıcı Adınız">
+                        <label for="username" class="form-label">Kullanıcı Adı:</label>
+                    </div>
+
+                    <div class="form-floating" data-aos="fade-left" data-aos-delay="700">
+                        <input type="password" class="form-control" id="password" name="password"
+                            placeholder="Şifreniz">
+                        <label for="password" class="form-label">Şifre:</label>
+                        <div class="password-hint">
+                            <a href="forgot-password.html">şifreni mi unuttun?</a>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="login-btn pulse" data-aos="fade-up" data-aos-delay="900">giriş
+                        yap</button>
+
+                    <div class="forgot-password" data-aos="fade-up" data-aos-delay="1000">
+                        Hesabın yok mu? <a href="register.html">Kaydol</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+    </script>
+</body>
+
+</html>

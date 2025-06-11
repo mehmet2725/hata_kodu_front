@@ -201,7 +201,7 @@ body::before {
     left: 0;
     width: 0;
     height: 1px;
-    background: #81c784;
+    background: #1988aa;
     transition: width 0.3s ease;
 }
 

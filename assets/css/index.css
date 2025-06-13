@@ -43,133 +43,108 @@ body::before {
     }
 }
 
-/* Header */
-.header {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-    padding: 15px 0;
+.site-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    padding: 8px 16px;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.06);
+    z-index: 100;
+    font-family: Arial, sans-serif;
 }
 
-.header::before {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #81c784, #64b5f6, #81c784);
-    background-size: 200% 100%;
-    animation: shimmer 4s ease-in-out infinite;
+/* Flex yapı */
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
 }
 
-@keyframes shimmer {
-    0% {
-        background-position: -200% 0;
-    }
-
-    100% {
-        background-position: 200% 0;
-    }
+/* Logo */
+.logo img {
+    height: 36px;
+    /* LOGO BOYUTUNU BURADAN KONTROL ET */
+    width: auto;
+    display: block;
 }
 
-.brand-logo {
-    height: 40px;
-    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.1));
-}
-
-.search-container {
-    max-width: 600px;
-    position: relative;
-    margin: 0 auto;
-}
-
-.search-input {
-    border: 1px solid #e0e0e0;
-    border-radius: 25px;
-    padding: 12px 50px 12px 20px;
-    font-size: 15px;
-    background: rgba(255, 255, 255, 0.9);
-    width: 100%;
-    transition: all 0.3s ease;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
-    color: #37474f;
-}
-
-.search-input:focus {
-    border-color: #81c784;
-    box-shadow: 0 0 0 3px rgba(129, 199, 132, 0.15);
-    outline: none;
-}
-
-.search-btn {
-    position: absolute;
-    right: 5px;
-    top: 50%;
-    transform: translateY(-50%);
-    background: linear-gradient(135deg, #81c784 0%, #64b5f6 100%);
-    border: none;
-    color: white;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
+/* Arama kutusu */
+.search-bar {
+    flex: 1;
+    max-width: 500px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    gap: 6px;
+}
+
+.search-bar input {
+    flex: 1;
+    padding: 6px 12px;
     font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    height: 34px;
 }
 
-.search-btn:hover {
-    transform: translateY(-50%) scale(1.05);
-    box-shadow: 0 6px 20px rgba(129, 199, 132, 0.3);
+.search-bar button {
+    padding: 6px 14px;
+    font-size: 14px;
+    border: none;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 20px;
+    cursor: pointer;
+    height: 34px;
 }
 
+/* Butonlar */
 .auth-buttons {
     display: flex;
-    gap: 12px;
-    align-items: center;
+    gap: 8px;
 }
 
-.auth-buttons .btn {
-    border-radius: 20px;
-    padding: 8px 20px;
-    font-weight: 500;
-    transition: all 0.3s ease;
+.btn {
+    padding: 6px 14px;
     font-size: 14px;
+    border-radius: 20px;
     text-decoration: none;
-    white-space: nowrap;
+    display: inline-block;
+    height: 34px;
+    line-height: 22px;
+    text-align: center;
 }
 
-.btn-outline-primary {
-    border: 2px solid #64b5f6;
-    color: #64b5f6;
+.btn.outline {
+    border: 1px solid #4caf50;
+    color: #4caf50;
     background: transparent;
 }
 
-.btn-outline-primary:hover {
-    background: #64b5f6;
-    border-color: #64b5f6;
+.btn.filled {
+    background-color: #4caf50;
     color: white;
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(100, 181, 246, 0.3);
+    border: none;
 }
 
-.btn-primary {
-    background: linear-gradient(135deg, #81c784 0%, #64b5f6 100%);
-    border: 2px solid transparent;
-    color: white;
+/* Mobil uyumluluk */
+@media (max-width: 600px) {
+    .header-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .auth-buttons {
+        justify-content: flex-end;
+    }
+
+    .logo {
+        text-align: center;
+        margin-bottom: 8px;
+    }
 }
 
-.btn-primary:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 6px 20px rgba(129, 199, 132, 0.35);
-}
 
 /* Main Layout */
 .main-layout {
@@ -445,7 +420,7 @@ body::before {
 }
 
 /* Responsive */
-@media (max-width: 1200px) {
+/* @media (max-width: 1200px) {
     .right-sidebar {
         display: none;
     }
@@ -486,7 +461,7 @@ body::before {
         height: 50px;
         font-size: 20px;
     }
-}
+} */
 
 .pulse {
     animation: pulse 3s infinite;

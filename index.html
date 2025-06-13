@@ -17,31 +17,26 @@
 
 <body>
     <!-- Header -->
-    <header class="header">
-        <div class="container-fluid">
-            <div class="row align-items-center">
-                <div class="col-md-2 text-start">
-                    <img src="assets/img/hata_kodu_logo.png" alt="Hata Kodu" class="brand-logo">
-                </div>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/img/hata_kodu_logo.png" alt="Hata Kodu">
+                </a>
+            </div>
 
-                <div class="col-md-6">
-                    <div class="search-container" data-aos="fade-down" data-aos-delay="200">
-                        <input type="text" class="search-input" placeholder="Forum'da hata kodu ara...">
-                        <button class="search-btn">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Forum'da hata kodu ara..." />
+                <button type="submit">Ara</button>
+            </div>
 
-                <div class="col-md-4 text-end">
-                    <div class="auth-buttons" data-aos="fade-left" data-aos-delay="400">
-                        <a href="sign_up.html" class="btn btn-outline-primary">Kaydol</a>
-                        <a href="sign_in.html" class="btn btn-primary">Giriş Yap</a>
-                    </div>
-                </div>
+            <div class="auth-buttons">
+                <a href="sign_up.html" class="btn outline">Kaydol</a>
+                <a href="sign_in.html" class="btn filled">Giriş Yap</a>
             </div>
         </div>
     </header>
+
 
     <!-- Main Layout -->
     <div class="main-layout">
@@ -610,6 +605,70 @@
             }, 1000);
         }
     </script>
+
+    <script>
+        // Sayfa yüklendikten sonra çalışacak
+        document.addEventListener('DOMContentLoaded', function () {
+
+            // Tüm forum postlarını seç
+            const forumPosts = document.querySelectorAll('.forum-post');
+
+            // Her forum postuna click event ekle
+            forumPosts.forEach((post, index) => {
+                post.addEventListener('click', function (e) {
+                    // Eğer post-stats (beğen, yorum, görüntüleme) tıklanmışsa sayfa değişmesin
+                    if (e.target.closest('.post-stats') ||
+                        e.target.closest('.post-stat') ||
+                        e.target.closest('button') ||
+                        e.target.closest('a')) {
+                        return;
+                    }
+
+                    // Post ID'sini belirle (index + 1 kullanıyoruz)
+                    const postId = index + 1;
+
+                    // Detail sayfasına yönlendir
+                    window.location.href = `details_page.html?id=${postId}`;
+                });
+
+                // Hover efekti için cursor ekle
+                post.style.cursor = 'pointer';
+
+                // Hover animasyonu
+                post.addEventListener('mouseenter', function () {
+                    this.style.transform = 'translateY(-2px)';
+                    this.style.boxShadow = '0 8px 25px rgba(0,0,0,0.15)';
+                });
+
+                post.addEventListener('mouseleave', function () {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+                });
+            });
+
+            // Alternatif: Eğer forum postlarında data-id attribute'u varsa:
+            /*
+            forumPosts.forEach(post => {
+                post.addEventListener('click', function(e) {
+                    if (e.target.closest('.post-stats') || 
+                        e.target.closest('.post-stat') || 
+                        e.target.closest('button') || 
+                        e.target.closest('a')) {
+                        return;
+                    }
+                    
+                    // data-id attribute'undan ID al
+                    const postId = this.getAttribute('data-id') || this.dataset.id;
+                    
+                    if (postId) {
+                        window.location.href = `topic-detail.html?id=${postId}`;
+                    }
+                });
+            });
+            */
+        });
+    </script>
+
 </body>
 
 </html>

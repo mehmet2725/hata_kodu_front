@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konu Detayı - Hata Kodu Forum</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"
+        integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/details_page.css">
+</head>
+
+<body>
+       <!-- Header -->
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/img/hata_kodu_logo.png" alt="Hata Kodu">
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Forum'da hata kodu ara..." />
+                <button type="submit">Ara</button>
+            </div>
+
+            <div class="auth-buttons">
+                <a href="sign_up.html" class="btn outline">Kaydol</a>
+                <a href="sign_in.html" class="btn filled">Giriş Yap</a>
+            </div>
+        </div>
+    </header>
+
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Question Card -->
+        <div class="question-card" data-aos="fade-up">
+            <div class="question-header">
+                <span class="question-category" id="questionCategory">JavaScript</span>
+                <span class="question-author" id="questionAuthor">@coderMehmet</span>
+                <span class="question-time" id="questionTime">1 saat önce</span>
+            </div>
+            <h1 class="question-title" id="questionTitle">
+                Cannot read property 'map' of undefined hatası
+            </h1>
+            <div class="question-content" id="questionContent">
+                React projesinde API'den gelen veriyi map ile döndürmeye çalışıyorum ama sürekli bu hatayı alıyorum.
+                Array undefined geliyor, neden böyle oluyor?
+                
+                <br><br>
+                
+                <strong>Kod örneği:</strong><br>
+                <code>
+                const [users, setUsers] = useState();<br>
+                // API çağrısı<br>
+                useEffect(() => {<br>
+                &nbsp;&nbsp;fetchUsers().then(data => setUsers(data));<br>
+                }, []);<br>
+                <br>
+                return (<br>
+                &nbsp;&nbsp;&lt;div&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;{users.map(user =&gt; (<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;div key={user.id}&gt;{user.name}&lt;/div&gt;<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;))}<br>
+                &nbsp;&nbsp;&lt;/div&gt;<br>
+                );
+                </code>
+            </div>
+            <div class="question-stats">
+                <div class="question-stat">
+                    <i class="fas fa-thumbs-up"></i>
+                    <span>18</span>
+                </div>
+                <div class="question-stat">
+                    <i class="fas fa-eye"></i>
+                    <span>234 görüntüleme</span>
+                </div>
+                <div class="question-stat">
+                    <i class="fas fa-share"></i>
+                    <span>Paylaş</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Answers Section -->
+        <div class="answers-section">
+            <div class="answers-header" data-aos="fade-up">
+                <div class="answers-title">
+                    <i class="fas fa-comments"></i>
+                    Çözümler
+                    <span class="answers-count">12 cevap</span>
+                </div>
+            </div>
+
+            <!-- Answer 1 -->
+            <div class="answer-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="answer-number">#1</div>
+                <div class="answer-header">
+                    <div class="answer-avatar">WW</div>
+                    <div class="answer-user-info">
+                        <div class="answer-username">@Walter_White</div>
+                        <div class="answer-time">20 dakika önce</div>
+                    </div>
+                </div>
+                <div class="answer-content">
+                    Arkadaşlar ekran kartında 3x8 pin var bende 2x8 bir taksam çalışır mı? İyi olmaz ekran kartına?
+                    
+                    <br><br>
+                    
+                    <strong>Çözüm:</strong> useState'i boş array ile initialize etmelisin:
+                    <br>
+                    <code>const [users, setUsers] = useState([]); // Boş array</code>
+                    
+                    <br><br>
+                    
+                    Ya da conditional rendering kullan:
+                    <br>
+                    <code>{users && users.map(user => ...)}</code>
+                </div>
+                <div class="answer-actions">
+                    <div class="answer-action">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>24</span>
+                    </div>
+                    <div class="answer-action">
+                        <i class="fas fa-reply"></i>
+                        <span>Yanıtla</span>
+                    </div>
+                    <div class="answer-action">
+                        <i class="fas fa-flag"></i>
+                        <span>Bildir</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Answer 2 -->
+            <div class="answer-card" data-aos="fade-up" data-aos-delay="200">
+                <div class="answer-number">#2</div>
+                <div class="answer-header">
+                    <div class="answer-avatar">WB</div>
+                    <div class="answer-user-info">
+                        <div class="answer-username">@Walter_Black</div>
+                        <div class="answer-time">10 dakika önce</div>
+                    </div>
+                </div>
+                <div class="answer-content">
+                    Stabil gitmezse, tam performans alamazsın.
+                    
+                    <br><br>
+                    
+                    Bu durumun nedeni useState'in başlangıç değerinin undefined olması. React render döngüsünde ilk render'da API çağrısı henüz tamamlanmadığı için users undefined oluyor.
+                    
+                    <br><br>
+                    
+                    <strong>En iyi çözüm:</strong><br>
+                    1. useState([]) - Boş array ile başlat<br>
+                    2. Loading state ekle<br>
+                    3. Error handling yap
+                </div>
+                <div class="answer-actions">
+                    <div class="answer-action">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>31</span>
+                    </div>
+                    <div class="answer-action">
+                        <i class="fas fa-reply"></i>
+                        <span>Yanıtla</span>
+                    </div>
+                    <div class="answer-action">
+                        <i class="fas fa-flag"></i>
+                        <span>Bildir</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Answer 3 -->
+            <div class="answer-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="answer-number">#3</div>
+                <div class="answer-header">
+                    <div class="answer-avatar">JS</div>
+                    <div class="answer-user-info">
+                        <div class="answer-username">@js_master</div>
+                        <div class="answer-time">5 dakika önce</div>
+                    </div>
+                </div>
+                <div class="answer-content">
+                    Optional chaining de kullanabilirsin modern JavaScript'te:
+                    
+                    <br><br>
+                    
+                    <code>
+                    {users?.map(user => (<br>
+                    &nbsp;&nbsp;&lt;div key={user.id}&gt;{user.name}&lt;/div&gt;<br>
+                    ))}
+                    </code>
+                    
+                    <br><br>
+                    
+                    Bu şekilde users undefined olsa bile hata vermez, sadece render edilmez.
+                </div>
+                <div class="answer-actions">
+                    <div class="answer-action">
+                        <i class="fas fa-thumbs-up"></i>
+                        <span>19</span>
+                    </div>
+                    <div class="answer-action">
+                        <i class="fas fa-reply"></i>
+                        <span>Yanıtla</span>
+                    </div>
+                    <div class="answer-action">
+                        <i class="fas fa-flag"></i>
+                        <span>Bildir</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sticky Answer Form -->
+    <div class="answer-form-container">
+        <div class="answer-form">
+            <textarea 
+                class="answer-input" 
+                placeholder="Çözümünüzü buraya yazın..."
+                id="answerInput"
+            ></textarea>
+            <button class="answer-submit" id="submitAnswer">
+                <i class="fas fa-paper-plane"></i>
+                Cevapla
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-in-out',
+            once: true,
+            mirror: false
+        });
+
+        // Get topic ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const topicId = urlParams.get('id');
+
+        // Sample data (bu gerçek projede API'den gelecek)
+        const topicsData = {
+            '1': {
+                category: 'JavaScript',
+                author: '@coderMehmet',
+                time: '1 saat önce',
+                title: 'Cannot read property \'map\' of undefined hatası',
+                content: 'React projesinde API\'den gelen veriyi map ile döndürmeye çalışıyorum ama sürekli bu hatayı alıyorum. Array undefined geliyor, neden böyle oluyor?',
+                stats: { likes: 18, views: 234 }
+            },
+            '2': {
+                category: 'PHP',
+                author: '@phpUstası',
+                time: '3 saat önce',
+                title: 'Fatal error: Call to undefined function hatası',
+                content: 'Laravel\'de custom helper function yazdım ama "Call to undefined function" hatası veriyor. composer autoload ile yükledim ama çalışmıyor.',
+                stats: { likes: 25, views: 156 }
+            }
+        };
+
+        // Load topic data
+        function loadTopicData() {
+            if (topicId && topicsData[topicId]) {
+                const topic = topicsData[topicId];
+                
+                document.getElementById('questionCategory').textContent = topic.category;
+                document.getElementById('questionAuthor').textContent = topic.author;
+                document.getElementById('questionTime').textContent = topic.time;
+                document.getElementById('questionTitle').textContent = topic.title;
+                document.getElementById('questionContent').textContent = topic.content;
+                
+                // Update page title
+                document.title = `${topic.title} - Hata Kodu Forum`;
+            }
+        }
+
+        // Load data on page load
+        loadTopicData();
+
+        // Answer form functionality
+        const answerInput = document.getElementById('answerInput');
+        const submitButton = document.getElementById('submitAnswer');
+
+        answerInput.addEventListener('input', function() {
+            if (this.value.trim().length > 0) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        });
+
+        submitButton.addEventListener('click', function() {
+            const answerText = answerInput.value.trim();
+            if (answerText) {
+                // Simulate answer submission
+                alert('Cevabınız gönderildi! Teşekkürler.');
+                answerInput.value = '';
+                submitButton.disabled = true;
+                
+                // Real implementation'da buraya API çağrısı yapılacak
+                // submitAnswer(topicId, answerText);
+            }
+        });
+
+        // Auto-resize textarea
+        answerInput.addEventListener('input', function() {
+            this.style.height = 'auto';
+            this.style.height = this.scrollHeight + 'px';
+        });
+
+        // Like functionality
+        document.querySelectorAll('.question-stat').forEach(stat => {
+            stat.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-thumbs-up')) {
+                    const span = this.querySelector('span');
+                    const currentCount = parseInt(span.textContent);
+                    span.textContent = currentCount + 1;
+                    icon.style.color = '#81c784';
+                    this.style.color = '#81c784';
+                }
+            });
+        });
+
+        // Answer like functionality
+        document.querySelectorAll('.answer-action').forEach(action => {
+            action.addEventListener('click', function() {
+                const icon = this.querySelector('i');
+                if (icon.classList.contains('fa-thumbs-up')) {
+                    const span = this.querySelector('span');
+                    const currentCount = parseInt(span.textContent);
+                    span.textContent = currentCount + 1;
+                    icon.style.color = '#81c784';
+                    this.style.color = '#81c784';
+                }
+            });
+        });
+
+        // Search functionality
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                const searchTerm = this.value.trim();
+                if (searchTerm) {
+                    // Simulate search
+                    console.log('Searching for:', searchTerm);
+                    // window.location.href = `search.html?q=${encodeURIComponent(searchTerm)}`;
+                }
+            }
+        });
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl/Cmd + Enter to submit answer
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                if (document.activeElement === answerInput) {
+                    submitButton.click();
+                }
+            }
+            
+            // Escape to clear answer input
+            if (e.key === 'Escape') {
+                answerInput.value = '';
+                answerInput.blur();
+            }
+        });
+
+        // Prevent form submission on Enter in textarea
+        answerInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey && !e.metaKey) {
+                e.preventDefault();
+                // Allow Shift+Enter for new line
+            }
+        });
+    </script>
+
+    
+
+</body>
+
+</html>

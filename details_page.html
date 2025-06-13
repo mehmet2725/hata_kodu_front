@@ -17,7 +17,7 @@
 </head>
 
 <body>
-       <!-- Header -->
+    <!-- Header -->
     <header class="site-header">
         <div class="header-container">
             <div class="logo">
@@ -31,9 +31,23 @@
                 <button type="submit">Ara</button>
             </div>
 
-            <div class="auth-buttons">
+            <!-- Giriş yapmamış kullanıcıya göster -->
+            <div class="auth-buttons" id="guest-buttons">
                 <a href="sign_up.html" class="btn outline">Kaydol</a>
                 <a href="sign_in.html" class="btn filled">Giriş Yap</a>
+            </div>
+
+            <!-- Giriş yapmış kullanıcıya göster -->
+            <div class="user-panel" id="user-panel" style="display: none;">
+                <a href="open_topic.html" class="btn filled">Konu Aç</a>
+                <div class="user-dropdown">
+                    <button class="user-btn" id="userMenuBtn">Kullanıcı ▼</button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="my_topics.html">Konularım</a>
+                        <a href="settings.html">Ayarlar</a>
+                        <a href="logout.html">Çıkış Yap</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -54,9 +68,9 @@
             <div class="question-content" id="questionContent">
                 React projesinde API'den gelen veriyi map ile döndürmeye çalışıyorum ama sürekli bu hatayı alıyorum.
                 Array undefined geliyor, neden böyle oluyor?
-                
+
                 <br><br>
-                
+
                 <strong>Kod örneği:</strong><br>
                 <code>
                 const [users, setUsers] = useState();<br>
@@ -112,15 +126,15 @@
                 </div>
                 <div class="answer-content">
                     Arkadaşlar ekran kartında 3x8 pin var bende 2x8 bir taksam çalışır mı? İyi olmaz ekran kartına?
-                    
+
                     <br><br>
-                    
+
                     <strong>Çözüm:</strong> useState'i boş array ile initialize etmelisin:
                     <br>
                     <code>const [users, setUsers] = useState([]); // Boş array</code>
-                    
+
                     <br><br>
-                    
+
                     Ya da conditional rendering kullan:
                     <br>
                     <code>{users && users.map(user => ...)}</code>
@@ -153,13 +167,14 @@
                 </div>
                 <div class="answer-content">
                     Stabil gitmezse, tam performans alamazsın.
-                    
+
                     <br><br>
-                    
-                    Bu durumun nedeni useState'in başlangıç değerinin undefined olması. React render döngüsünde ilk render'da API çağrısı henüz tamamlanmadığı için users undefined oluyor.
-                    
+
+                    Bu durumun nedeni useState'in başlangıç değerinin undefined olması. React render döngüsünde ilk
+                    render'da API çağrısı henüz tamamlanmadığı için users undefined oluyor.
+
                     <br><br>
-                    
+
                     <strong>En iyi çözüm:</strong><br>
                     1. useState([]) - Boş array ile başlat<br>
                     2. Loading state ekle<br>
@@ -193,17 +208,17 @@
                 </div>
                 <div class="answer-content">
                     Optional chaining de kullanabilirsin modern JavaScript'te:
-                    
+
                     <br><br>
-                    
+
                     <code>
                     {users?.map(user => (<br>
                     &nbsp;&nbsp;&lt;div key={user.id}&gt;{user.name}&lt;/div&gt;<br>
                     ))}
                     </code>
-                    
+
                     <br><br>
-                    
+
                     Bu şekilde users undefined olsa bile hata vermez, sadece render edilmez.
                 </div>
                 <div class="answer-actions">
@@ -227,11 +242,7 @@
     <!-- Sticky Answer Form -->
     <div class="answer-form-container">
         <div class="answer-form">
-            <textarea 
-                class="answer-input" 
-                placeholder="Çözümünüzü buraya yazın..."
-                id="answerInput"
-            ></textarea>
+            <textarea class="answer-input" placeholder="Çözümünüzü buraya yazın..." id="answerInput"></textarea>
             <button class="answer-submit" id="submitAnswer">
                 <i class="fas fa-paper-plane"></i>
                 Cevapla
@@ -278,13 +289,13 @@
         function loadTopicData() {
             if (topicId && topicsData[topicId]) {
                 const topic = topicsData[topicId];
-                
+
                 document.getElementById('questionCategory').textContent = topic.category;
                 document.getElementById('questionAuthor').textContent = topic.author;
                 document.getElementById('questionTime').textContent = topic.time;
                 document.getElementById('questionTitle').textContent = topic.title;
                 document.getElementById('questionContent').textContent = topic.content;
-                
+
                 // Update page title
                 document.title = `${topic.title} - Hata Kodu Forum`;
             }
@@ -297,7 +308,7 @@
         const answerInput = document.getElementById('answerInput');
         const submitButton = document.getElementById('submitAnswer');
 
-        answerInput.addEventListener('input', function() {
+        answerInput.addEventListener('input', function () {
             if (this.value.trim().length > 0) {
                 submitButton.disabled = false;
             } else {
@@ -305,28 +316,28 @@
             }
         });
 
-        submitButton.addEventListener('click', function() {
+        submitButton.addEventListener('click', function () {
             const answerText = answerInput.value.trim();
             if (answerText) {
                 // Simulate answer submission
                 alert('Cevabınız gönderildi! Teşekkürler.');
                 answerInput.value = '';
                 submitButton.disabled = true;
-                
+
                 // Real implementation'da buraya API çağrısı yapılacak
                 // submitAnswer(topicId, answerText);
             }
         });
 
         // Auto-resize textarea
-        answerInput.addEventListener('input', function() {
+        answerInput.addEventListener('input', function () {
             this.style.height = 'auto';
             this.style.height = this.scrollHeight + 'px';
         });
 
         // Like functionality
         document.querySelectorAll('.question-stat').forEach(stat => {
-            stat.addEventListener('click', function() {
+            stat.addEventListener('click', function () {
                 const icon = this.querySelector('i');
                 if (icon.classList.contains('fa-thumbs-up')) {
                     const span = this.querySelector('span');
@@ -340,7 +351,7 @@
 
         // Answer like functionality
         document.querySelectorAll('.answer-action').forEach(action => {
-            action.addEventListener('click', function() {
+            action.addEventListener('click', function () {
                 const icon = this.querySelector('i');
                 if (icon.classList.contains('fa-thumbs-up')) {
                     const span = this.querySelector('span');
@@ -353,7 +364,7 @@
         });
 
         // Search functionality
-        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+        document.querySelector('.search-input').addEventListener('keypress', function (e) {
             if (e.key === 'Enter') {
                 const searchTerm = this.value.trim();
                 if (searchTerm) {
@@ -379,14 +390,14 @@
         });
 
         // Keyboard shortcuts
-        document.addEventListener('keydown', function(e) {
+        document.addEventListener('keydown', function (e) {
             // Ctrl/Cmd + Enter to submit answer
             if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
                 if (document.activeElement === answerInput) {
                     submitButton.click();
                 }
             }
-            
+
             // Escape to clear answer input
             if (e.key === 'Escape') {
                 answerInput.value = '';
@@ -395,7 +406,7 @@
         });
 
         // Prevent form submission on Enter in textarea
-        answerInput.addEventListener('keydown', function(e) {
+        answerInput.addEventListener('keydown', function (e) {
             if (e.key === 'Enter' && !e.shiftKey && !e.ctrlKey && !e.metaKey) {
                 e.preventDefault();
                 // Allow Shift+Enter for new line
@@ -403,7 +414,7 @@
         });
     </script>
 
-    
+
 
 </body>
 

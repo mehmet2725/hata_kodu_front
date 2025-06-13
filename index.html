@@ -16,7 +16,6 @@
 </head>
 
 <body>
-    <!-- Header -->
     <header class="site-header">
         <div class="header-container">
             <div class="logo">
@@ -30,9 +29,23 @@
                 <button type="submit">Ara</button>
             </div>
 
-            <div class="auth-buttons">
+            <!-- Giriş yapmamış kullanıcıya göster -->
+            <div class="auth-buttons" id="guest-buttons">
                 <a href="sign_up.html" class="btn outline">Kaydol</a>
                 <a href="sign_in.html" class="btn filled">Giriş Yap</a>
+            </div>
+
+            <!-- Giriş yapmış kullanıcıya göster -->
+            <div class="user-panel" id="user-panel" style="display: none;">
+                <a href="open_topic.html" class="btn filled">Konu Aç</a>
+                <div class="user-dropdown">
+                    <button class="user-btn" id="userMenuBtn">Kullanıcı ▼</button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="my_topics.html">Konularım</a>
+                        <a href="settings.html">Ayarlar</a>
+                        <a href="logout.html">Çıkış Yap</a>
+                    </div>
+                </div>
             </div>
         </div>
     </header>
@@ -668,6 +681,41 @@
             */
         });
     </script>
+
+    <script>
+        const isLoggedIn = true; // Burayı oturumdan kontrol edersin
+        const username = "Mehmet"; // Kullanıcının adı
+
+        if (isLoggedIn) {
+            document.getElementById("guest-buttons").style.display = "none";
+            document.getElementById("user-panel").style.display = "flex";
+            document.getElementById("userMenuBtn").textContent = username + " ▼";
+        }
+
+        // Dropdown menüsünü aç/kapat
+        document.addEventListener("click", function (e) {
+            const btn = document.getElementById("userMenuBtn");
+            const menu = document.getElementById("dropdownMenu");
+
+            if (btn.contains(e.target)) {
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            } else if (!menu.contains(e.target)) {
+                menu.style.display = "none";
+            }
+        });
+    </script>
+
+    <script>
+        const params = new URLSearchParams(window.location.search);
+        const topicId = params.get("id");
+
+        if (topicId) {
+            // Örnek: localStorage'dan veya veri kaynağından konuyu getir
+            document.title = "Konu #" + topicId;
+            document.body.innerHTML += `<div class="topic-detail">Şu anda ${topicId} ID'li konuyu görüntülüyorsun.</div>`;
+        }
+    </script>
+    
 
 </body>
 

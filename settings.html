@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayarlar</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hata Kodu - Forum</title>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.min.js"
+        integrity="sha384-RuyvpeZCxMJCqVUGFI0Do1mQrods/hhxYlcVfGPOfQtPJh0JCw12tUAZ/Mv10S7D"
+        crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/settings.css">
+</head>
+
+<body>
+    <header class="site-header">
+        <div class="header-container">
+            <div class="logo">
+                <a href="index.html">
+                    <img src="assets/img/hata_kodu_logo.png" alt="Hata Kodu">
+                </a>
+            </div>
+
+            <div class="search-bar">
+                <input type="text" placeholder="Forum'da hata kodu ara..." />
+                <button type="submit">Ara</button>
+            </div>
+
+            <!-- Giriş yapmamış kullanıcıya göster -->
+            <div class="auth-buttons" id="guest-buttons">
+                <a href="sign_up.html" class="btn outline">Kaydol</a>
+                <a href="sign_in.html" class="btn filled">Giriş Yap</a>
+            </div>
+
+            <!-- Giriş yapmış kullanıcıya göster -->
+            <div class="user-panel" id="user-panel" style="display: none;">
+                <a href="open_topic.html" class="btn filled">Konu Aç</a>
+                <div class="user-dropdown">
+                    <button class="user-btn" id="userMenuBtn">Kullanıcı ▼</button>
+                    <div class="dropdown-menu" id="dropdownMenu">
+                        <a href="my_topics.html">Konularım</a>
+                        <a href="settings.html">Ayarlar</a>
+                        <a href="logout.html">Çıkış Yap</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- SETTINGS PAGE -->
+    <div class="settings-page">
+        <aside class="sidebar">
+            <ul>
+                <li class="active" data-section="password">Şifre Değiştir</li>
+                <li data-section="delete">Hesabımı Sil</li>
+            </ul>
+        </aside>
+
+        <main class="settings-content">
+            <!-- Şifre Değiştir Formu -->
+            <section id="password-section">
+                <h2>Şifre Değiştir</h2>
+                <form id="passwordChangeForm">
+                    <label for="currentPassword">Mevcut Şifre</label>
+                    <input type="password" id="currentPassword" required>
+
+                    <label for="newPassword">Yeni Şifre</label>
+                    <input type="password" id="newPassword" required>
+
+                    <label for="confirmPassword">Yeni Şifre (Tekrar)</label>
+                    <input type="password" id="confirmPassword" required>
+
+                    <button type="submit" class="btn filled">Şifreyi Güncelle</button>
+                    <p id="passwordMessage" class="message"></p>
+                </form>
+            </section>
+
+            <!-- Hesap Silme Formu -->
+            <section id="delete-section" style="display: none;">
+                <h2>Hesabımı Sil</h2>
+                <p class="warning">
+                    ⚠️ <strong>DİKKAT:</strong> Hesabınızı silme işlemi <strong>kalıcıdır</strong>, geri alınamaz.
+                    Konularınız kalmaya devam edecektir.
+                </p>
+                <form id="deleteAccountForm">
+                    <label for="deletePassword">Mevcut Şifre</label>
+                    <input type="password" id="deletePassword" required>
+
+                    <label for="deletePasswordConfirm">Mevcut Şifre (Tekrar)</label>
+                    <input type="password" id="deletePasswordConfirm" required>
+
+                    <button type="submit" class="btn danger">Hesabımı Sil</button>
+                    <p id="deleteMessage" class="message"></p>
+                </form>
+            </section>
+        </main>
+    </div>
+
+    <script src="settings.js"></script>
+
+
+    <script>
+        const isLoggedIn = true; // Burayı oturumdan kontrol edersin
+        const username = "Mehmet"; // Kullanıcının adı
+
+        if (isLoggedIn) {
+            document.getElementById("guest-buttons").style.display = "none";
+            document.getElementById("user-panel").style.display = "flex";
+            document.getElementById("userMenuBtn").textContent = username + " ▼";
+        }
+
+        // Dropdown menüsünü aç/kapat
+        document.addEventListener("click", function (e) {
+            const btn = document.getElementById("userMenuBtn");
+            const menu = document.getElementById("dropdownMenu");
+
+            if (btn.contains(e.target)) {
+                menu.style.display = menu.style.display === "block" ? "none" : "block";
+            } else if (!menu.contains(e.target)) {
+                menu.style.display = "none";
+            }
+        });
+    </script>
+
+    <script>
+        // Sidebar geçişi
+        document.querySelectorAll(".sidebar li").forEach((tab) => {
+            tab.addEventListener("click", () => {
+                document.querySelectorAll(".sidebar li").forEach((t) => t.classList.remove("active"));
+                tab.classList.add("active");
+
+                const section = tab.dataset.section;
+                document.getElementById("password-section").style.display = section === "password" ? "block" : "none";
+                document.getElementById("delete-section").style.display = section === "delete" ? "block" : "none";
+            });
+        });
+
+        // Şifre değiştir formu
+        document.getElementById("passwordChangeForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const newPass = document.getElementById("newPassword").value;
+            const confirm = document.getElementById("confirmPassword").value;
+            const msg = document.getElementById("passwordMessage");
+
+            if (newPass !== confirm) {
+                msg.textContent = "Yeni şifreler uyuşmuyor!";
+                msg.style.color = "red";
+                return;
+            }
+
+            msg.textContent = "Şifreniz başarıyla güncellendi!";
+            msg.style.color = "green";
+            this.reset();
+        });
+
+        // Hesap silme formu
+        document.getElementById("deleteAccountForm").addEventListener("submit", function (e) {
+            e.preventDefault();
+            const pass = document.getElementById("deletePassword").value;
+            const confirm = document.getElementById("deletePasswordConfirm").value;
+            const msg = document.getElementById("deleteMessage");
+
+            if (pass !== confirm) {
+                msg.textContent = "Şifreler uyuşmuyor!";
+                msg.style.color = "red";
+                return;
+            }
+
+            // Buraya AJAX/Fetch ile silme talebi yollanabilir.
+            msg.textContent = "Hesabınız silindi. Güle güle!";
+            msg.style.color = "red";
+            this.reset();
+        });
+    </script>
+</body>
+
+</html>

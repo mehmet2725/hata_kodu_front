@@ -25,8 +25,8 @@
             </div>
 
             <div class="search-bar">
-                <input type="text" placeholder="Forum'da hata kodu ara..." />
-                <button type="submit">Ara</button>
+                <input type="text" id="searchInput" placeholder="Forum'da hata kodu ara..." />
+                <button type="submit" id="searchBtn">Ara</button>
             </div>
 
             <!-- Giriş yapmamış kullanıcıya göster -->
@@ -43,7 +43,7 @@
                     <div class="dropdown-menu" id="dropdownMenu">
                         <a href="my_topics.html">Konularım</a>
                         <a href="settings.html">Ayarlar</a>
-                        <a href="logout.html">Çıkış Yap</a>
+                        <a href="#" id="logoutBtn">Çıkış Yap</a>
                     </div>
                 </div>
             </div>
@@ -113,10 +113,6 @@
         <!-- Main Content -->
         <main class="main-content">
             <!-- Create Post -->
-            <div class="create-post-card" data-aos="fade-up" data-aos-delay="300">
-                <input type="text" class="create-post-input"
-                    placeholder="Hangi hatayla karşılaştın? Hemen çözüm bul...">
-            </div>
 
             <!-- Forum Posts -->
             <div class="forum-post" data-aos="fade-up" data-aos-delay="400">
@@ -683,8 +679,9 @@
     </script>
 
     <script>
-        const isLoggedIn = true; // Burayı oturumdan kontrol edersin
-        const username = "Mehmet"; // Kullanıcının adı
+        // localStorage üzerinden giriş durumu kontrol ediliyor
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+        const username = localStorage.getItem("username") || "Kullanıcı";
 
         if (isLoggedIn) {
             document.getElementById("guest-buttons").style.display = "none";
@@ -703,6 +700,20 @@
                 menu.style.display = "none";
             }
         });
+
+        // Çıkış yap butonuna event listener
+        const logoutBtn = document.getElementById("logoutBtn");
+        if (logoutBtn) {
+            logoutBtn.addEventListener("click", () => {
+                // localStorage temizleniyor
+                localStorage.setItem("isLoggedIn", "false");
+                localStorage.removeItem("username");
+
+                // Sayfa yenileniyor
+                location.reload();
+            });
+        }
+
     </script>
 
     <script>
@@ -715,7 +726,41 @@
             document.body.innerHTML += `<div class="topic-detail">Şu anda ${topicId} ID'li konuyu görüntülüyorsun.</div>`;
         }
     </script>
-    
+
+    <script>
+        document.getElementById("searchBtn").addEventListener("click", function () {
+            const query = document.getElementById("searchInput").value.trim().toLowerCase();
+            const posts = document.querySelectorAll(".forum-post");
+
+            let bulundu = false;
+
+            posts.forEach((post) => {
+                const title = post.querySelector(".post-title").textContent.toLowerCase();
+                if (title.includes(query)) {
+                    bulundu = true;
+                    post.scrollIntoView({ behavior: "smooth", block: "start" });
+                    post.style.outline = "3px solid #007bff";
+                    post.style.backgroundColor = "#f0f8ff";
+
+                    setTimeout(() => {
+                        post.style.outline = "none";
+                        post.style.backgroundColor = "transparent";
+                    }, 3000);
+                }
+            });
+
+            if (!bulundu) {
+                alert("Aradığınız konu bulunamadı.");
+            }
+        });
+
+        document.getElementById("searchInput").addEventListener("keypress", function (e) {
+            if (e.key === "Enter") {
+                document.getElementById("searchBtn").click();
+            }
+        });
+    </script>
+
 
 </body>
 
